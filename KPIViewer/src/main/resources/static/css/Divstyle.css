@@ -1,0 +1,39 @@
+*{
+	font-family:simsun;
+	font-size: 12px;
+}
+body{
+	background-color: #f2f2f2;
+	overflow-y: hidden;
+	height: 632px;
+}
+.MainDivStyle{
+	margin-top: 20px;
+	margin-left: 15px;
+	margin-right:35px;
+}
+.pagetitle{
+	margin-top: 15px;
+	margin-left: 15px;
+	font-family: "microsoft yahei";
+	font-size: 24px;
+	display: inline-block;
+}
+.subtitle{
+	font-family: "microsoft yahei";
+	font-size: 18px;
+	display: inline-block;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.topButtonGroup{
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-right:35px;
+}
+.tableContainer{
+	clear: both;
+	margin-top: 20px;
+	margin-left: 15px;
+	margin-right:35px;
+}
