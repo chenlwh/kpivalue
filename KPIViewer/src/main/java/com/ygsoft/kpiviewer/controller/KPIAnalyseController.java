@@ -81,7 +81,7 @@ public class KPIAnalyseController{
 		return result;
 	}
 	
-	@RequestMapping(value = "/transfer", method = RequestMethod.POST)
+	@RequestMapping(value = "/transfer")
 	public Map<String, Object> transfer() {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {

@@ -63,11 +63,7 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.3.0</version>
 		</dependency>
-		
-		<dependency>
-  			 <groupId>org.elasticsearch.client</groupId>
-   			<artifactId>transport</artifactId>
-		</dependency>
+
         
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
