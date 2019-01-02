@@ -17,8 +17,10 @@ import org.springframework.stereotype.Service;
 
 import com.ygsoft.kpiviewer.entity.Server;
 import com.ygsoft.kpiviewer.entity.ServerKPIValue;
+import com.ygsoft.kpiviewer.entity.ServerOfflineLog;
 import com.ygsoft.kpiviewer.service.KPIAnalyseService;
 import com.ygsoft.kpiviewer.service.repository.ServerKPIValueRepository;
+import com.ygsoft.kpiviewer.service.repository.ServerOfflineLogRepository;
 import com.ygsoft.kpiviewer.service.repository.ServerRepository;
 import com.ygsoft.kpiviewer.vo.ServerNumVO;
 
@@ -28,6 +30,8 @@ public class KPIAnalyseServiceImpl implements KPIAnalyseService {
 	private ServerRepository serverRepository;
 	@Autowired
 	private ServerKPIValueRepository serverKPIValueRepository;
+	@Autowired
+	private ServerOfflineLogRepository serverOfflineLogRepository;
 	@Autowired
 	private NamedParameterJdbcTemplate namedTemplate;
 	@Autowired
@@ -49,15 +53,9 @@ public class KPIAnalyseServiceImpl implements KPIAnalyseService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getLogHistory(String id) {
-		String sql = " select l.serverid, s.address, l.updatetime, l.status from pv_offline_log l, pv_server s "
-				+ "where l.serverid=s.id and l.serverid=:serverId order by l.updatetime desc ";
-
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("serverId", id);
-
-		List<Map<String, Object>> list = namedTemplate.queryForList(sql, paramMap);
-		return list;
+	public List<ServerOfflineLog> getLogHistory(String id) {		
+		return serverOfflineLogRepository.findByServeridOrderByUpdatetimeDesc(id);		
+		
 	}
 
 	@Override
@@ -268,8 +266,8 @@ public class KPIAnalyseServiceImpl implements KPIAnalyseService {
 
 	@Override
 	public List<Map<String, Object>> getKPIValueByDaily(String serverId) {
-		String sql = " select max(t.daily_login_num) dailyLoginNum, max(t.total_login_num) loginNum, max(t.session_num) sessionNum, to_char(t.insert_date, 'yyyy-MM-dd') insertDate  "
-				+ "from PV_SERVER_KPIVALUE t where t.server_id =:serverId group by to_char(t.insert_date, 'yyyy-MM-dd') order by insertDate ASC";
+		String sql = " select max(t.daily_login_num) \"dailyLoginNum\", max(t.total_login_num) \"loginNum\", max(t.session_num) \"sessionNum\", to_char(t.insert_date, 'yyyy-MM-dd') \"insertDate\"  "
+				+ "from PV_SERVER_KPIVALUE t where t.server_id =:serverId group by to_char(t.insert_date, 'yyyy-MM-dd') order by \"insertDate\" ASC";
 
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("serverId", serverId);

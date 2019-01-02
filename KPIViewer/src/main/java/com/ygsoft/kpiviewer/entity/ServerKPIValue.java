@@ -106,156 +106,10 @@ public class ServerKPIValue implements Serializable{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd",timezone="GMT+8")
     private Date insertDay;
 
-	/**
-	 * @return the registeredNum
-	 */
-	public Integer getRegisteredNum() {
-		return registeredNum;
-	}
-
-	/**
-	 * @param registeredNum the registeredNum to set
-	 */
-	public void setRegisteredNum(Integer registeredNum) {
-		this.registeredNum = registeredNum;
-	}
-
-	/**
-	 * @return the onlineNum
-	 */
-	public Integer getOnlineNum() {
-		return onlineNum;
-	}
-
-	/**
-	 * @param onlineNum the onlineNum to set
-	 */
-	public void setOnlineNum(Integer onlineNum) {
-		this.onlineNum = onlineNum;
-	}
-
-	/**
-	 * @return the dailyLoginNum
-	 */
-	public Integer getDailyLoginNum() {
-		return dailyLoginNum;
-	}
-
-	/**
-	 * @param dailyLoginNum the dailyLoginNum to set
-	 */
-	public void setDailyLoginNum(Integer dailyLoginNum) {
-		this.dailyLoginNum = dailyLoginNum;
-	}
-
-	/**
-	 * @return the loginNum
-	 */
-	public Integer getLoginNum() {
-		return loginNum;
-	}
-
-	/**
-	 * @param loginNum the loginNum to set
-	 */
-	public void setLoginNum(Integer loginNum) {
-		this.loginNum = loginNum;
-	}
-
-	/**
-	 * @return the sessionNum
-	 */
-	public Integer getSessionNum() {
-		return sessionNum;
-	}
-
-	/**
-	 * @param sessionNum the sessionNum to set
-	 */
-	public void setSessionNum(Integer sessionNum) {
-		this.sessionNum = sessionNum;
-	}
-
-	/**
-	 * @return the responseTime
-	 */
-	public Integer getResponseTime() {
-		return responseTime;
-	}
-
-	/**
-	 * @param responseTime the responseTime to set
-	 */
-	public void setResponseTime(Integer responseTime) {
-		this.responseTime = responseTime;
-	}
-
-	/**
-	 * @return the runningTime
-	 */
-	public Integer getRunningTime() {
-		return runningTime;
-	}
-
-	/**
-	 * @param runningTime the runningTime to set
-	 */
-	public void setRunningTime(Integer runningTime) {
-		this.runningTime = runningTime;
-	}
-
-	/**
-	 * @return the tableSpaceSize
-	 */
-	public Double getTableSpaceSize() {
-		return tableSpaceSize;
-	}
-
-	/**
-	 * @param tableSpaceSize the tableSpaceSize to set
-	 */
-	public void setTableSpaceSize(Double tableSpaceSize) {
-		this.tableSpaceSize = tableSpaceSize;
-	}
-
-	/**
-	 * @return the dbResponseTime
-	 */
-	public Integer getDbResponseTime() {
-		return dbResponseTime;
-	}
-
-	/**
-	 * @param dbResponseTime the dbResponseTime to set
-	 */
-	public void setDbResponseTime(Integer dbResponseTime) {
-		this.dbResponseTime = dbResponseTime;
-	}
-
-	/**
-	 * @return the insertDate
-	 */
-	public Date getInsertDate() {
-		return insertDate;
-	}
-
-	/**
-	 * @param insertDate the insertDate to set
-	 */
-	public void setInsertDate(Date insertDate) {
-		this.insertDate = insertDate;
-	}
-
-	/**
-	 * @return the id
-	 */
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -268,6 +122,86 @@ public class ServerKPIValue implements Serializable{
 		this.serverId = serverId;
 	}
 
+	public Integer getRegisteredNum() {
+		return registeredNum;
+	}
+
+	public void setRegisteredNum(Integer registeredNum) {
+		this.registeredNum = registeredNum;
+	}
+
+	public Integer getOnlineNum() {
+		return onlineNum;
+	}
+
+	public void setOnlineNum(Integer onlineNum) {
+		this.onlineNum = onlineNum;
+	}
+
+	public Integer getDailyLoginNum() {
+		return dailyLoginNum;
+	}
+
+	public void setDailyLoginNum(Integer dailyLoginNum) {
+		this.dailyLoginNum = dailyLoginNum;
+	}
+
+	public Integer getLoginNum() {
+		return loginNum;
+	}
+
+	public void setLoginNum(Integer loginNum) {
+		this.loginNum = loginNum;
+	}
+
+	public Integer getSessionNum() {
+		return sessionNum;
+	}
+
+	public void setSessionNum(Integer sessionNum) {
+		this.sessionNum = sessionNum;
+	}
+
+	public Integer getResponseTime() {
+		return responseTime;
+	}
+
+	public void setResponseTime(Integer responseTime) {
+		this.responseTime = responseTime;
+	}
+
+	public Integer getRunningTime() {
+		return runningTime;
+	}
+
+	public void setRunningTime(Integer runningTime) {
+		this.runningTime = runningTime;
+	}
+
+	public Double getTableSpaceSize() {
+		return tableSpaceSize;
+	}
+
+	public void setTableSpaceSize(Double tableSpaceSize) {
+		this.tableSpaceSize = tableSpaceSize;
+	}
+
+	public Integer getDbResponseTime() {
+		return dbResponseTime;
+	}
+
+	public void setDbResponseTime(Integer dbResponseTime) {
+		this.dbResponseTime = dbResponseTime;
+	}
+
+	public Date getInsertDate() {
+		return insertDate;
+	}
+
+	public void setInsertDate(Date insertDate) {
+		this.insertDate = insertDate;
+	}
+
 	public Date getInsertDay() {
 		return insertDay;
 	}
@@ -276,6 +210,4 @@ public class ServerKPIValue implements Serializable{
 		this.insertDay = insertDay;
 	}
 
-	
-	
 }

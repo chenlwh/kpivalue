@@ -14,23 +14,15 @@ function fetchAjaxData(id){
 			if(data.suc=="yes"){
 				initLogTable(data.logList, 280);
 				
-				var daily = data.dailyKPIList;
-				for(var i=0; i<daily.length; i++){
-					var dateKPI = daily[i].insertdate.replace(/-/g,"/");
-					var dailyLoginNum = daily[i].dailyloginnum;
-					var loginNum = daily[i].loginnum;
-					var sessionNum = daily[i].sessionnum;
-					
-					dailyLoginNumOption.xAxis.data[i]= dateKPI;
-					dailyLoginNumOption.series[0].data[i] = dailyLoginNum;
-					
-					totalLoginNumOption.xAxis.data[i]= dateKPI;
-					totalLoginNumOption.series[0].data[i] = loginNum;
-					
-					sessionNumOption.xAxis.data[i]= dateKPI;
-					sessionNumOption.series[0].data[i] = sessionNum;
-					
-				}
+				var daily = data.dailyKPI;
+				dailyLoginNumOption.xAxis.data= daily.daily;
+				dailyLoginNumOption.series[0].data = daily.dailyLoginNum;
+				
+				totalLoginNumOption.xAxis.data= daily.daily;
+				totalLoginNumOption.series[0].data = daily.loginNum;
+				
+				sessionNumOption.xAxis.data= daily.daily;
+				sessionNumOption.series[0].data = daily.sessionNum;
 				
 				if(daily.length>0){
 					dailyLoginNumChart.setOption(dailyLoginNumOption);
@@ -38,37 +30,25 @@ function fetchAjaxData(id){
 					sessionNumChart.setOption(sessionNumOption);
 				}
 				
-				var result = data.kpiValueList;
-				for(var i=0; i<result.length; i++){
-					var dateMillis = result[i].insertDate;
-					var registeredNum = result[i].registeredNum==null? "0":result[i].registeredNum;
-					var onlineNum = result[i].onlineNum==null? "0":result[i].onlineNum;
-					var responseTime = result[i].responseTime==null? "0":result[i].responseTime;
-					var runningTime = result[i].runningTime==null? "0":result[i].runningTime;
-					var tableSpaceSize = result[i].tableSpaceSize==null? "0":result[i].tableSpaceSize;
-					var dbResponseTime = result[i].dbResponseTime==null? "0":result[i].dbResponseTime;
-					
-					var dateKPI = convertToDate(dateMillis);
-					registedNumOption.xAxis.data[i]= dateKPI;
-					registedNumOption.series[0].data[i] = registeredNum;
-					
-					onlineNumOption.xAxis.data[i]= dateKPI;
-					onlineNumOption.series[0].data[i] = onlineNum;
-						
-					serverResTimeOption.xAxis.data[i]= dateKPI;
-					serverResTimeOption.series[0].data[i] = responseTime;
-					
-					runningTimeOption.xAxis.data[i]= dateKPI;
-					runningTimeOption.series[0].data[i] = runningTime;
-					
-					tableSpaceSizeOption.xAxis.data[i]= dateKPI;
-					tableSpaceSizeOption.series[0].data[i] = tableSpaceSize;
-					
-					dbResTimeOption.xAxis.data[i]= dateKPI;
-					dbResTimeOption.series[0].data[i] = dbResponseTime;
-				}
+				var result = data.kpiValue;
+				registedNumOption.xAxis.data= result.name;
+				registedNumOption.series[0].data = result.registeredNum;
 				
+				onlineNumOption.xAxis.data= result.name;
+				onlineNumOption.series[0].data = result.onlineNum;
+					
+				serverResTimeOption.xAxis.data= result.name;
+				serverResTimeOption.series[0].data = result.responseTime;
 				
+				runningTimeOption.xAxis.data= result.name;
+				runningTimeOption.series[0].data = result.runningTime;
+				
+				tableSpaceSizeOption.xAxis.data= result.name;
+				tableSpaceSizeOption.series[0].data = result.tableSpaceSize;
+				
+				dbResTimeOption.xAxis.data= result.name;
+				dbResTimeOption.series[0].data = result.dbResponseTime;
+								
 				if(result.length>0){
 					registedNumChart.setOption(registedNumOption);
 					onlineNumChart.setOption(onlineNumOption);
@@ -87,6 +67,7 @@ function fetchAjaxData(id){
 }
 
 function initLogTable(data, h1) {
+	var title = GetQueryString("name");
 	$('#logHistoryTable').datagrid({
 		data: data,
 		maxHeight: h1,
@@ -103,7 +84,11 @@ function initLogTable(data, h1) {
 		},
 		columns:[[
 			{field:"serverid",title:"serverid",hidden:true},
-			{field:"address",title:"Portal服务地址",width:"38%"},
+			{field:"address",title:"Portal服务地址",width:"38%",
+				formatter:function(value,row,index){
+					return title;
+					
+				}},
 			{field:"status",title:"状态",width:"30%",
 				formatter:function(value,row,index){
 					if(value=="0"){

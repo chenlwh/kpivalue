@@ -14,13 +14,13 @@ $().ready(function(){
 				initAllTable(result,280);
 				initOnlineTable(onlineList,280);
 				
-				var monthList = data.monthList;			
-				for(var i=0; i<monthList.length; i++){
-					monthlyServerNumOption.xAxis[0].data[i]= monthList[i].addPeriod;
-					monthlyServerNumOption.series[0].data[i] = monthList[i].offlineNum;
-					monthlyServerNumOption.series[1].data[i] = monthList[i].onlineNum;
-					monthlyServerChart.setOption(monthlyServerNumOption);
-				}
+				var values = data.values;			
+
+				monthlyServerNumOption.xAxis[0].data= values.name;
+				monthlyServerNumOption.series[0].data = values.off;
+				monthlyServerNumOption.series[1].data = values.on;
+				monthlyServerChart.setOption(monthlyServerNumOption);
+				
 			}else{
 				$.messager.alert('异常','异常!',"error");
 			}

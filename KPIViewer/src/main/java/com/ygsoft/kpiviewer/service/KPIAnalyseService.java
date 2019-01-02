@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ygsoft.kpiviewer.entity.Server;
 import com.ygsoft.kpiviewer.entity.ServerKPIValue;
+import com.ygsoft.kpiviewer.entity.ServerOfflineLog;
 import com.ygsoft.kpiviewer.vo.ServerNumVO;
 
 @Service
@@ -15,7 +16,7 @@ public interface KPIAnalyseService {
 	List<Server> getServerByCondition(String condition);
 	List<ServerKPIValue> getKPIValueByServerId(String serverId);
 	List<Map<String,Object>> getKPIValueByDaily(String serverId);
-	List<Map<String, Object>> getLogHistory(String id);
+	List<ServerOfflineLog> getLogHistory(String id);
 	List<ServerNumVO> getMonthlyServerNum();
 	List<ServerNumVO> getDailyServerNum();
 

@@ -205,10 +205,10 @@ public class ElasticSearchUtil {
     		Double dailyLoginNumValue = dailyLoginNum.getValue();
     		Double loginNumValue = loginNum.getValue();
     		Double sessionNumValue = sessionNum.getValue();
-    		map.put("dailyloginnum", dailyLoginNumValue);
-    		map.put("loginnum", loginNumValue);
-    		map.put("sessionnum", sessionNumValue);
-    		map.put("insertdate", insertDay);
+    		map.put("dailyLoginNum", dailyLoginNumValue);
+    		map.put("loginNum", loginNumValue);
+    		map.put("sessionNum", sessionNumValue);
+    		map.put("insertDate", insertDay);
     		
     		list.add(map);
     	}
