@@ -1,6 +1,8 @@
 package com.ygsoft.kpiviewer.util;
 
 import java.io.ByteArrayInputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,11 +17,13 @@ import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ygsoft.kpiviewer.entity.ServerKPIValue;
 
 public class WsdlKPIValueUtil {
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(WsdlKPIValueUtil.class);
     //解析xml文档
 	public static ServerKPIValue formatXml(String result){
     	Map<String,String> map = new LinkedHashMap<String,String>();
@@ -73,36 +77,51 @@ public class WsdlKPIValueUtil {
     	return kpiValue;
     }
 	
-	public static String portalData(String endPoint) {	
-		String param = "<?xml version='1.0' encoding='gb2312'?>"
-		+ "<info>"
-		+ "<CorporationCode>68,99</CorporationCode>"
-		+ "<Time>2016-12-19 00:00:00</Time>"
-		// + "<api name='BusinessSystemOnlineRoll'></api>"
-		// + "<api name='BusinessSystemLoginRoll'></api>"
-		+ "<api name='BusinessUserRegNum'></api>"
-		+ "<api name='BusinessSystemOnlineNum'></api>"
-		+ "<api name='BusinessDayLoginNum'></api>"
-		+ "<api name='BusinessVisitCount'></api>"
-		+ "<api name='BusinessSystemSessionNum'></api>"
-		+ "<api name='BusinessSystemResponseTime'></api>"
-		+ "<api name='BusinessSystemRunningTime'></api>"
-		+ "<api name='BusinessDataTableSpace'></api>"
-		+ "<api name='BusinessSystemDBTime'></api>"
-		+ "</info>";
- 		// 命名空间
-		String nameSpace = "http://api.webservice.matcloud.ygsoft.com/";
+	public static String portalData(String endPoint,String nameSpace) {	
+		LOGGER.info(endPoint);
 		try {
-			JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
-			// url为调用webService的wsdl地址
-			Client client = dcf.createClient(endPoint);
-			// namespace是命名空间，methodName是方法名
-			QName name = new QName(nameSpace, "getKPIValue");
+			URL url = new URL(endPoint);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setConnectTimeout(3000);
+			con.setReadTimeout(3000);
+			con.setDoOutput(true);
+			con.setDoInput(true);
+			
+			con.connect();
+			if(con!=null) {
+				String param = "<?xml version='1.0' encoding='gb2312'?>"
+						+ "<info>"
+						+ "<CorporationCode>68,99</CorporationCode>"
+						+ "<Time>2016-12-19 00:00:00</Time>"
+						// + "<api name='BusinessSystemOnlineRoll'></api>"
+						// + "<api name='BusinessSystemLoginRoll'></api>"
+						+ "<api name='BusinessUserRegNum'></api>"
+						+ "<api name='BusinessSystemOnlineNum'></api>"
+						+ "<api name='BusinessDayLoginNum'></api>"
+						+ "<api name='BusinessVisitCount'></api>"
+						+ "<api name='BusinessSystemSessionNum'></api>"
+						+ "<api name='BusinessSystemResponseTime'></api>"
+						+ "<api name='BusinessSystemRunningTime'></api>"
+						+ "<api name='BusinessDataTableSpace'></api>"
+						+ "<api name='BusinessSystemDBTime'></api>"
+						+ "</info>";
+				
+				JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
+				// url为调用webService的wsdl地址
+				Client client = dcf.createClient(endPoint);
+		        
+				// namespace是命名空间，methodName是方法名
+				QName name = new QName(nameSpace, "getKPIValue");
 
-			Object[] objects = client.invoke(name, param);
-			return objects[0].toString();
-		} catch (Exception e) {
-			e.getMessage();
+				Object[] objects = client.invoke(name, param);
+				String result = objects[0].toString();			
+				
+				LOGGER.info(result);
+				return result;
+			}
+			
+		}catch(Exception e) {
+			LOGGER.info(e.getMessage());
 		}
 
 		return null;

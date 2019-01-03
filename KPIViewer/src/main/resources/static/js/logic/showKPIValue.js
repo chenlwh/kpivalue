@@ -24,7 +24,7 @@ function fetchAjaxData(id){
 				sessionNumOption.xAxis.data= daily.daily;
 				sessionNumOption.series[0].data = daily.sessionNum;
 				
-				if(daily.length>0){
+				if(daily.daily.length>0){
 					dailyLoginNumChart.setOption(dailyLoginNumOption);
 					totalLoginNumChart.setOption(totalLoginNumOption);
 					sessionNumChart.setOption(sessionNumOption);
@@ -49,7 +49,7 @@ function fetchAjaxData(id){
 				dbResTimeOption.xAxis.data= result.name;
 				dbResTimeOption.series[0].data = result.dbResponseTime;
 								
-				if(result.length>0){
+				if(result.name.length>0){
 					registedNumChart.setOption(registedNumOption);
 					onlineNumChart.setOption(onlineNumOption);
 					serverResTimeChart.setOption(serverResTimeOption);

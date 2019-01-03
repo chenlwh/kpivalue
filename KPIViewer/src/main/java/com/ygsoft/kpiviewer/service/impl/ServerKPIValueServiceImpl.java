@@ -82,14 +82,16 @@ public class ServerKPIValueServiceImpl implements ServerKPIValueService {
 			String serverId = server.getId();
 			
 			String wsdl = address + "services/GetKPIValue?wsdl";
+			String nameSpace = "http://www.ygsoft.com/GetKPIValue/";
 			
 			String appType = server.getType();
 			if("EDT".equals(appType)) {
 				wsdl = address + "webservice/getKPIValueService?wsdl";
+				// 命名空间
+				nameSpace = "http://api.webservice.matcloud.ygsoft.com/";
 			}
 			
-			String serverInfo = WsdlKPIValueUtil.portalData(wsdl);
-			
+			String serverInfo = WsdlKPIValueUtil.portalData(wsdl, nameSpace);		
 			ServerKPIValue kpiValue = WsdlKPIValueUtil.formatXml(serverInfo);
 
 			kpiValue.setServerId(serverId);

@@ -235,6 +235,10 @@ public class ElasticSearchUtil {
         
     	return list;
     }
+//    
+//    public static void main(String[] args) {
+//		ElasticSearchUtil.deleteIndex("server_kpi_value");
+//	}
 	
 	
 }

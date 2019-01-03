@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ygsoft.kpiviewer.entity.Server;
-import com.ygsoft.kpiviewer.entity.ServerKPIValue;
 import com.ygsoft.kpiviewer.entity.ServerOfflineLog;
 import com.ygsoft.kpiviewer.service.ESAnalyseService;
 import com.ygsoft.kpiviewer.service.KPIAnalyseService;
@@ -120,8 +119,10 @@ public class KPIAnalyseController{
 				if(spaceSize==null) {
 					spaceSize = 0.0;
 				}
-				
-				nameList.add(insertDate);
+				String time = insertDate.toString();
+				int index = time.indexOf(".");
+				time = time.substring(0,index).replaceAll("T", " ").replaceAll("-", "/");
+				nameList.add(time);
 				registeredNumList.add(registeredNum);
 				onlineNumList.add(onlineNum);
 				responseTimeList.add(responseTime);
@@ -181,7 +182,7 @@ public class KPIAnalyseController{
 			List<Object> loginNumList = new ArrayList<Object>();
 			List<Object> sessionNumList = new ArrayList<Object>();
 			for(Map<String,Object> map: dailyKPIList) {
-				dailyList.add(map.get("insertDate").toString().replaceAll("-", ""));
+				dailyList.add(map.get("insertDate").toString().replaceAll("-", "/"));
 				dailyLoginNumList.add(map.get("dailyLoginNum"));
 				loginNumList.add(map.get("loginNum"));
 				sessionNumList.add(map.get("sessionNum"));
