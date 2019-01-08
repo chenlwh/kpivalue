@@ -83,12 +83,7 @@ public class WsdlKPIValueUtil {
 			URL url = new URL(endPoint);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setConnectTimeout(3000);
-			con.setReadTimeout(3000);
-			con.setDoOutput(true);
-			con.setDoInput(true);
-			
-			con.connect();
-			if(con!=null) {
+			if(con.getResponseCode()==200) {
 				String param = "<?xml version='1.0' encoding='gb2312'?>"
 						+ "<info>"
 						+ "<CorporationCode>68,99</CorporationCode>"
@@ -114,7 +109,7 @@ public class WsdlKPIValueUtil {
 				QName name = new QName(nameSpace, "getKPIValue");
 
 				Object[] objects = client.invoke(name, param);
-				String result = objects[0].toString();			
+				String result = objects[0].toString();	
 				
 				LOGGER.info(result);
 				return result;
