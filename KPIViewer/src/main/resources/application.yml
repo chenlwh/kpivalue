@@ -19,7 +19,7 @@
 spring:    
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@10.51.103.82:1521:PORTALVIEWER
+    url: jdbc:oracle:thin:@127.0.0.1:1521:PORTALVIEWER
     username: portal
     password: portal
     
